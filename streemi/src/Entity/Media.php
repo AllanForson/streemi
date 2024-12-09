@@ -47,9 +47,6 @@ class Media
     #[ORM\ManyToOne(inversedBy: 'mediaWatch')]
     private ?WatchHistory $watchHistory = null;
 
-    #[ORM\Column(type: Types::SIMPLE_ARRAY, enumType: MediaTypeEnum::class)]
-    private array $mediaType = [];
-
     /**
      * @var Collection<int, Category>
      */
@@ -244,21 +241,6 @@ class Media
         if ($this->playlistMedia->removeElement($playlistMedium)) {
             $playlistMedium->removeMediaPlaylist($this);
         }
-
-        return $this;
-    }
-
-    /**
-     * @return MediaTypeEnum[]
-     */
-    public function getMediaType(): array
-    {
-        return $this->mediaType;
-    }
-
-    public function setMediaType(array $mediaType): static
-    {
-        $this->mediaType = $mediaType;
 
         return $this;
     }
